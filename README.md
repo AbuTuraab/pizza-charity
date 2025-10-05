@@ -1,60 +1,38 @@
-![inkathon Banner](frontend/public/inkathon-readme-banner.png)
+pizza-charity
 
-# pizza_limited
+<img alt="License: GPL v3" src="https://img.shields.io/badge/License-GPLv3-blue.svg">
+<img alt="Rust" src="https://img.shields.io/badge/Rust-000000?logo=rust&amp;logoColor=white">
+<img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-000000?logo=typescript&amp;logoColor=white">
+<img alt="Next.js" src="https://img.shields.io/badge/Next.js-000000?logo=next.js&amp;logoColor=white">
+A full-stack decentralized pizza charity dApp built with ink! smart contracts, Next.js, and Bun.
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Built with ink!](https://raw.githubusercontent.com/paritytech/ink/master/.images/badge.svg)](https://use.ink)
-![Rust](https://img.shields.io/badge/Rust-000000?logo=rust&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-000000?logo=typescript&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white)
+🚀 Features
+Donate and order pizza transparently on-chain
+ink! v6 smart contracts (Rust, PolkaVM compatible)
+Modern frontend: Next.js 15, React 19, Tailwind CSS v4
+Type-safe contract interactions via PAPI & ReactiveDOT
+Bun-powered monorepo for fast builds and scripts
+Docker & Vercel deployment ready
+🏁 Quickstart
+Requirements:
 
-> Full-stack dApp built with ink! smart contracts and Next.js
+Node.js v20+ (recommended: nvm)
+Bun
+Rust toolchain (for contracts)
+Setup:
 
-- 🤖 **Check out the [live demo](https://inkathon.xyz)**
-- 📖 **Explore our new [documentation](https://docs.inkathon.xyz)**
-- 💬 **Join the discussion on [Telegram](https://t.me/inkathon)**
+Open http://localhost:3000 to view the app.
 
-## Quickstart ⚡
-
-> [!IMPORTANT]
->
-> - Setup Node.js v20+ (recommended via [nvm](https://github.com/nvm-sh/nvm))
-> - Install [Bun](https://bun.sh/)
-
-Use the new `create-inkathon-app` CLI to set up the boilerplate:
-
-```bash
-bunx create-inkathon-app@latest
-
-cd <project-name>
-
-bun run dev
-```
-
-Learn more in our new [documentation](https://docs.inkathon.xyz).
-
-## About the project
-
-The inkathon boilerplate is almost as old as ink! itself. With over 200 stars, more than 250 public projects depending on it, and the most active [ink! Telegram group](https://t.me/inkathon).
-
-It offers a complete setup for developing full-stack dApps on Polkadot with ink! smart contracts and Next.js and now shines in new glory with full ink! v6 support. Powered by Papi, ReactiveDOT, Pop CLI, and more.
-
-## New Features in v6
-
-The boilerplate has been completely rebuilt with:
-
-- **Full ink! v6 support** with PolkaVM compatibility
-- **Type-safe contract interactions** via PAPI
-- **Modern stack**: Bun, Next.js 15, React 19, Tailwind CSS v4
-- **Improved DX**: Better build scripts & deployment automation
-- **Production-ready**: Docker support, self-hosting optimized
-- **New `create-inkathon-app` CLI** for setting up the boilerplate in seconds
-- **New [documentation](https://docs.inkathon.xyz)** with educational resources & guides
-
-## Changelog
-
-> [!NOTE]  
-> The old ink! v5 compatible boilerplate is available on the [`v1` branch](https://github.com/scio-labs/inkathon/tree/v1).
-
-The v6 changelog is available on the [GitHub releases page](https://github.com/scio-labs/inkathon/releases).
-# pizza-charity
+🧩 Monorepo Structure
+frontend — Next.js app (UI, web3 integration)
+contracts — ink! smart contracts (Rust)
+scripts/ — Deployment and utility scripts
+📝 Scripts
+bun run dev — Start frontend in dev mode
+bun run node — Run local contracts node
+bun run build — Build contracts and frontend
+bun run test — Run contract tests
+🛠️ Deployment
+Vercel: Zero-config for frontend
+Docker: For full-stack self-hosting
+Contracts: Deploy with included scripts

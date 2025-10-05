@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "inkathon",
+      "name": "Pizza Charity",
       "devDependencies": {
         "@biomejs/biome": "^2.2.4",
         "concurrently": "^9.2.1",

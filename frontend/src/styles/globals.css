@@ -143,7 +143,7 @@
   * Custom ink!athon Styles
   */
   body {
-    @apply bg-gradient-to-b from-background/100 via-background/100 to-[hsl(170,89%,17%)] bg-no-repeat bg-center bg-fixed;
+    @apply bg-gradient-to-b from-background/100 via-background/100 to-[hsl(295,89%,17%)] bg-no-repeat bg-center bg-fixed;
   }
   .inkathon-card {
     @apply !min-h-[250px] !bg-gradient-to-b !border !from-foreground/5 !via-foreground/0 !to-foreground/0 !rounded-3xl !border-foreground/15 !bg-foreground/8 !shadow-xl !ring-1 !ring-foreground/15 !ring-offset-2 !ring-offset-background;
