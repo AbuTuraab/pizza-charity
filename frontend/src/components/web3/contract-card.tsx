@@ -3,11 +3,12 @@ import { useChainId, useTypedApi } from "@reactive-dot/react"
 import { useCallback, useEffect, useState } from "react"
 import { toast } from "sonner"
 import { useSignerAndAddress } from "@/hooks/use-signer-and-address"
-import { flipper } from "@/lib/inkathon/deployments"
+import { pizza } from "@/lib/inkathon/deployments"
 import { CardSkeleton } from "../layout/skeletons"
 import { Button } from "../ui/button-extended"
 import { Card, CardHeader, CardTitle } from "../ui/card"
 import { Table, TableBody, TableCell, TableRow } from "../ui/table"
+import { ALICE } from "@/lib/inkathon/constants"
 
 export function ContractCard() {
   const [queryIsLoading, setQueryIsLoading] = useState(true)
@@ -19,33 +20,40 @@ export function ContractCard() {
   /**
    * Contract Read (Query)
    */
-  const [flipperState, setFlipperState] = useState<boolean>()
-
+  const [dailySupply, setDailySupply] = useState<any>()
+  const [remainingSupply, setRemainingSupply] = useState<any>()
+  const [maxOrderPerUser, setMaxOrderPerUser] = useState<any>()
+  const [quantityOrdered, setQuantityOrdered] = useState<number>(0)
+  
   const queryContract = useCallback(async () => {
     setQueryIsLoading(true)
     try {
       if (!api || !chain) return
 
       // Create SDK & contract instance
-      const sdk = createReviveSdk(api as ReviveSdkTypedApi, flipper.contract)
-      const contract = sdk.getContract(flipper.evmAddresses[chain])
+      const sdk = createReviveSdk(api as ReviveSdkTypedApi, pizza.contract)
+      const contract = sdk.getContract(pizza.evmAddresses[chain])
 
       // Option 1: Query storage directly
       const storageResult = await contract.getStorage().getRoot()
-      const newState = storageResult.success ? storageResult.value : undefined
-      setFlipperState(newState)
 
-      // Option 2: Query contract
-      // NOTE: Unfortunately, as `origin` is mandatory, every passed accounts needs
-      //       to be mapped in an extra transaction first before it can be used for querying.
-      // WORKAROUNDS: Use pre-mapped `//Alice` or use `getStorage` directly as shown above.
-      //
-      // const isMapped = await sdk.addressIsMapped(ALICE)
-      // if (!isMapped) throw new Error(`Account '${ALICE}' (//Alice) not mapped`)
-      //
-      // const result = await contract.query("get", { origin: ALICE })
-      // const newState = result.success ? result.value.response : undefined
-      // setFlipperState(newState)
+       const result = await contract.query("get_daily_supply", {
+          origin: ALICE
+        }); 
+      const newDailySupplyState = result.success ? result.value.response : undefined
+      setDailySupply(newDailySupplyState)
+      console.log(dailySupply);
+
+       const result1 = await contract.query("get_remaining_supply", {
+          origin: ALICE
+        }); 
+      const newRemainingSupplyState = result1.success ? result1.value.response : undefined
+      setRemainingSupply(newRemainingSupplyState)
+
+       
+      const newMaxOrderPerUserState = storageResult.success ? storageResult.value.max_order_per_user-1 : undefined
+      setMaxOrderPerUser(newMaxOrderPerUserState )
+      
     } catch (error) {
       console.error(error)
     } finally {
@@ -60,11 +68,11 @@ export function ContractCard() {
   /**
    * Contract Write (Transaction)
    */
-  const handleFlip = useCallback(async () => {
+  const orderPizza = useCallback(async () => {
     if (!api || !chain || !signer) return
 
-    const sdk = createReviveSdk(api as ReviveSdkTypedApi, flipper.contract)
-    const contract = sdk.getContract(flipper.evmAddresses[chain])
+    const sdk = createReviveSdk(api as ReviveSdkTypedApi, pizza.contract, )
+    const contract = sdk.getContract(pizza.evmAddresses[chain])
 
     // Map account if not mapped
     const isMapped = await sdk.addressIsMapped(signerAddress)
@@ -75,17 +83,25 @@ export function ContractCard() {
 
     // Send transaction
     const tx = contract
-      .send("flip", { origin: signerAddress })
+      .send("order_pizza_and_pay",
+        {
+          data: {
+            quantity_ordered: quantityOrdered
+          },
+          origin: signerAddress
+        },
+
+      )
       .signAndSubmit(signer)
       .then((tx) => {
         queryContract()
-        if (!tx.ok) throw new Error("Failed to send transaction", { cause: tx.dispatchError })
+        if (!tx.ok) throw new Error("Failed to send transaction here, please check it", { cause: tx.dispatchError })
       })
 
     toast.promise(tx, {
       loading: "Sending transaction...",
-      success: "Successfully flipped",
-      error: "Failed to send transaction",
+      success: "Successfully Ordered, your Pizza is on its way",
+      error: "Failed to send transaction here too",
     })
   }, [signer, api, chain])
 
@@ -94,41 +110,61 @@ export function ContractCard() {
   return (
     <Card className="inkathon-card">
       <CardHeader className="relative">
-        <CardTitle>Flipper Contract</CardTitle>
+        <CardTitle>Pizza Ordering Contract</CardTitle>
 
         <Button
           variant="default"
           size="sm"
           className="-top-2 absolute right-6"
-          onClick={() => handleFlip()}
+          onClick={() => orderPizza()}
         >
-          Call Flip
+        Oder Pizza
         </Button>
       </CardHeader>
 
       <Table className="inkathon-card-table">
         <TableBody>
           <TableRow>
-            <TableCell>Flip State</TableCell>
+            <TableCell>Total Daily Supply</TableCell>
             <TableCell>
-              {flipperState === true ? "True" : flipperState === false ? "False" : "Unknown"}
+              {dailySupply}
             </TableCell>
           </TableRow>
 
+            <TableRow>
+            <TableCell>Remaining Supply</TableCell>
+            <TableCell>
+              {remainingSupply}
+            </TableCell>
+          </TableRow>
+
+            <TableRow>
+            <TableCell>Maximum Order Per User</TableCell>
+            <TableCell>
+              {maxOrderPerUser}
+            </TableCell>
+          </TableRow>
+
+
           <TableRow>
             <TableCell>Address</TableCell>
-            <TableCell>{flipper.evmAddresses[chain]}</TableCell>
+            <TableCell>{pizza.evmAddresses[chain]}</TableCell>
           </TableRow>
 
           <TableRow>
-            <TableCell>Language</TableCell>
-            <TableCell>{flipper.contract.metadata.source.language}</TableCell>
+                <TableCell>Pizza Amount</TableCell>
+                <TableCell>
+                  <input type="number" max="6" 
+                  placeholder="Amount" 
+                   value={quantityOrdered}
+                   onChange={e => setQuantityOrdered(Number(e.target.value))}
+                  />
+                </TableCell>
+
           </TableRow>
 
-          <TableRow>
-            <TableCell>Compiler</TableCell>
-            <TableCell>{flipper.contract.metadata.source.compiler}</TableCell>
-          </TableRow>
+        
+    
         </TableBody>
       </Table>
     </Card>

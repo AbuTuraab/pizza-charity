@@ -1,4 +1,4 @@
-export const ss58Address = "5CcLzryQxo3bukUnWpjx9NNzDZS6wfLvBPps6KZdQkDZ6gGv"
-export const evmAddress = "0x1821a2ddb28eef980974addf7b933403144a1822"
-export const blockHash = "0x205c38caae38112d05ebcc9c26276d5afd121e33c288cc676829127d6d3ee514"
-export const blockNumber = 643619
+export const ss58Address = "5EtZPqHSCf39EjyGsJnvB64yF6cb9Vm8Amp4uWCoN3EDATTs"
+export const evmAddress = "0x7cf7c22615edeb218fcd04918743465613ac133c"
+export const blockHash = "0xedea1d649841f3b218af528d492a7eac5c7dd3dca0d0ae280ff2bc31bb2a2676"
+export const blockNumber = 1634112

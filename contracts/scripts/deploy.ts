@@ -19,11 +19,11 @@ import { writeAddresses } from "./utils/write-addresses"
 const main = async () => {
   const initResult = await initApi()
 
-  const deployResult = await deployContract(initResult, "flipper", contracts.flipper, "new", {
-    init_value: true,
+  const deployResult = await deployContract(initResult, "pizza_limited", contracts.pizza_limited, "new", {
+    max_order_per_user: 5,
   })
 
-  await writeAddresses({ flipper: deployResult })
+  await writeAddresses({ pizza_limited: deployResult })
 }
 
 main()

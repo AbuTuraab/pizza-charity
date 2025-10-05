@@ -1,0 +1,876 @@
+{
+  "source": {
+    "hash": "0xf733ff7f64055baba5b774a0419d4c373004b08cc0a2a2a905f34c48cd6ec8e3",
+    "language": "ink! 6.0.0-alpha.4",
+    "compiler": "rustc 1.89.0",
+    "build_info": {
+      "build_mode": "Release",
+      "cargo_contract_version": "6.0.0-alpha.4",
+      "rust_toolchain": "stable-x86_64-unknown-linux-gnu"
+    }
+  },
+  "contract": {
+    "name": "pizza_limited",
+    "version": "0.1.0",
+    "authors": [
+      "[your_name] <[your_email]>"
+    ]
+  },
+  "image": null,
+  "spec": {
+    "constructors": [
+      {
+        "args": [
+          {
+            "label": "max_order_per_user",
+            "type": {
+              "displayName": [
+                "u32"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "new",
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink_primitives",
+            "ConstructorResult"
+          ],
+          "type": 11
+        },
+        "selector": "0x9bae9d5e"
+      }
+    ],
+    "docs": [],
+    "environment": {
+      "accountId": {
+        "displayName": [
+          "AccountId"
+        ],
+        "type": 20
+      },
+      "balance": {
+        "displayName": [
+          "Balance"
+        ],
+        "type": 19
+      },
+      "blockNumber": {
+        "displayName": [
+          "BlockNumber"
+        ],
+        "type": 0
+      },
+      "hash": {
+        "displayName": [
+          "Hash"
+        ],
+        "type": 22
+      },
+      "nativeToEthRatio": 100000000,
+      "staticBufferSize": 16384,
+      "timestamp": {
+        "displayName": [
+          "Timestamp"
+        ],
+        "type": 9
+      }
+    },
+    "events": [
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "caller",
+            "type": {
+              "displayName": [
+                "Option"
+              ],
+              "type": 18
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "quantity_ordered",
+            "type": {
+              "displayName": [
+                "u32"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "docs": [],
+        "label": "PizzaOrdered",
+        "module_path": "pizza_limited::pizza_limited",
+        "signature_topic": "0x8671b553970b7fa6710341d7ad3817acb31fc1b4830872d40875408331c22459"
+      },
+      {
+        "args": [
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "from",
+            "type": {
+              "displayName": [
+                "Option"
+              ],
+              "type": 18
+            }
+          },
+          {
+            "docs": [],
+            "indexed": true,
+            "label": "to",
+            "type": {
+              "displayName": [
+                "Option"
+              ],
+              "type": 18
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "value",
+            "type": {
+              "displayName": [
+                "Balance"
+              ],
+              "type": 19
+            }
+          }
+        ],
+        "docs": [],
+        "label": "Transferred",
+        "module_path": "pizza_limited::pizza_limited",
+        "signature_topic": "0x3e676d8cf728b0dbc8606529cbd67cd655f9821c579d89662a3a31270fdfe0f0"
+      }
+    ],
+    "lang_error": {
+      "displayName": [
+        "ink",
+        "LangError"
+      ],
+      "type": 12
+    },
+    "messages": [
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "get_remaining_supply",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 13
+        },
+        "selector": "0x3ff817a3"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "get_daily_supply",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 13
+        },
+        "selector": "0x05648e41"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "get_last_reset",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 14
+        },
+        "selector": "0xcf24da1d"
+      },
+      {
+        "args": [
+          {
+            "label": "quantity_ordered",
+            "type": {
+              "displayName": [
+                "u32"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "order_pizza_and_pay",
+        "mutates": true,
+        "payable": true,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 15
+        },
+        "selector": "0x4e4b2e79"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "reset_supply",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 13
+        },
+        "selector": "0x446887fa"
+      }
+    ]
+  },
+  "storage": {
+    "root": {
+      "layout": {
+        "struct": {
+          "fields": [
+            {
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 0
+                }
+              },
+              "name": "daily_supply"
+            },
+            {
+              "layout": {
+                "root": {
+                  "layout": {
+                    "leaf": {
+                      "key": "0x374ff015",
+                      "ty": 0
+                    }
+                  },
+                  "root_key": "0x374ff015",
+                  "ty": 1
+                }
+              },
+              "name": "orders_per_user"
+            },
+            {
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 0
+                }
+              },
+              "name": "remaining_supply"
+            },
+            {
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 0
+                }
+              },
+              "name": "max_order_per_user"
+            },
+            {
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 9
+                }
+              },
+              "name": "last_reset"
+            },
+            {
+              "layout": {
+                "leaf": {
+                  "key": "0x00000000",
+                  "ty": 0
+                }
+              },
+              "name": "total_orders"
+            }
+          ],
+          "name": "PizzaLimited"
+        }
+      },
+      "root_key": "0x00000000",
+      "ty": 10
+    }
+  },
+  "types": [
+    {
+      "id": 0,
+      "type": {
+        "def": {
+          "primitive": "u32"
+        }
+      }
+    },
+    {
+      "id": 1,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "K",
+            "type": 2
+          },
+          {
+            "name": "V",
+            "type": 0
+          },
+          {
+            "name": "KeyType",
+            "type": 5
+          }
+        ],
+        "path": [
+          "ink_storage",
+          "lazy",
+          "mapping",
+          "Mapping"
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 3,
+                "typeName": "[u8; 20]"
+              }
+            ]
+          }
+        },
+        "path": [
+          "primitive_types",
+          "H160"
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": {
+        "def": {
+          "array": {
+            "len": 20,
+            "type": 4
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "type": {
+        "def": {
+          "primitive": "u8"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "L",
+            "type": 6
+          },
+          {
+            "name": "R",
+            "type": 7
+          }
+        ],
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ResolverKey"
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "AutoKey"
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": {
+        "def": {
+          "composite": {}
+        },
+        "params": [
+          {
+            "name": "ParentKey",
+            "type": 8
+          }
+        ],
+        "path": [
+          "ink_storage_traits",
+          "impls",
+          "ManualKey"
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "type": {
+        "def": {
+          "tuple": []
+        }
+      }
+    },
+    {
+      "id": 9,
+      "type": {
+        "def": {
+          "primitive": "u64"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "name": "daily_supply",
+                "type": 0,
+                "typeName": "<u32 as::ink::storage::traits::AutoStorableHint<::ink::storage\n::traits::ManualKey<1732505978u32, ()>,>>::Type"
+              },
+              {
+                "name": "orders_per_user",
+                "type": 1,
+                "typeName": "<Mapping<H160, u32> as::ink::storage::traits::AutoStorableHint<\n::ink::storage::traits::ManualKey<368070455u32, ()>,>>::Type"
+              },
+              {
+                "name": "remaining_supply",
+                "type": 0,
+                "typeName": "<u32 as::ink::storage::traits::AutoStorableHint<::ink::storage\n::traits::ManualKey<3627179407u32, ()>,>>::Type"
+              },
+              {
+                "name": "max_order_per_user",
+                "type": 0,
+                "typeName": "<u32 as::ink::storage::traits::AutoStorableHint<::ink::storage\n::traits::ManualKey<2270428167u32, ()>,>>::Type"
+              },
+              {
+                "name": "last_reset",
+                "type": 9,
+                "typeName": "<Timestamp as::ink::storage::traits::AutoStorableHint<::ink::\nstorage::traits::ManualKey<1251136106u32, ()>,>>::Type"
+              },
+              {
+                "name": "total_orders",
+                "type": 0,
+                "typeName": "<u32 as::ink::storage::traits::AutoStorableHint<::ink::storage\n::traits::ManualKey<2049126311u32, ()>,>>::Type"
+              }
+            ]
+          }
+        },
+        "path": [
+          "pizza_limited",
+          "pizza_limited",
+          "PizzaLimited"
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 8
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 12
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 8
+          },
+          {
+            "name": "E",
+            "type": 12
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 1,
+                "name": "CouldNotReadInput"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ink_primitives",
+          "LangError"
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 0
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 12
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 0
+          },
+          {
+            "name": "E",
+            "type": 12
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 9
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 12
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 9
+          },
+          {
+            "name": "E",
+            "type": 12
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 16
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 12
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 16
+          },
+          {
+            "name": "E",
+            "type": 12
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 0
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 17
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 0
+          },
+          {
+            "name": "E",
+            "type": 17
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "DailySupplyReached"
+              },
+              {
+                "index": 1,
+                "name": "MaxOrderPerUserReached"
+              },
+              {
+                "index": 2,
+                "name": "CannotOrderZeroPizzas"
+              },
+              {
+                "index": 3,
+                "name": "PriceEnteredIsNotCorrect"
+              }
+            ]
+          }
+        },
+        "path": [
+          "pizza_limited",
+          "pizza_limited",
+          "PizzaError"
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "None"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 2
+                  }
+                ],
+                "index": 1,
+                "name": "Some"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 2
+          }
+        ],
+        "path": [
+          "Option"
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "type": {
+        "def": {
+          "primitive": "u128"
+        }
+      }
+    },
+    {
+      "id": 20,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 21,
+                "typeName": "[u8; 32]"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ink_primitives",
+          "types",
+          "AccountId"
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "type": {
+        "def": {
+          "array": {
+            "len": 32,
+            "type": 4
+          }
+        }
+      }
+    },
+    {
+      "id": 22,
+      "type": {
+        "def": {
+          "composite": {
+            "fields": [
+              {
+                "type": 21,
+                "typeName": "[u8; 32]"
+              }
+            ]
+          }
+        },
+        "path": [
+          "ink_primitives",
+          "types",
+          "Hash"
+        ]
+      }
+    }
+  ],
+  "version": 6
+}

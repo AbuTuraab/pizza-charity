@@ -37,16 +37,16 @@ export function App() {
             </Suspense>
 
             {/* Account Balance */}
-            <Suspense>
+            {/* <Suspense>
               <AccountBalance />
-            </Suspense>
+            </Suspense> */}
           </div>
 
           <div className="flex w-full flex-col gap-8">
-            {/* Chain Metadata */}
+            {/* Chain Metadata
             <Suspense fallback={<CardSkeleton />}>
               <ChainInfoCard />
-            </Suspense>
+            </Suspense> */}
 
             {/* Contract Read & Write */}
             <Suspense fallback={<CardSkeleton />}>

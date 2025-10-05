@@ -57,3 +57,4 @@ The boilerplate has been completely rebuilt with:
 > The old ink! v5 compatible boilerplate is available on the [`v1` branch](https://github.com/scio-labs/inkathon/tree/v1).
 
 The v6 changelog is available on the [GitHub releases page](https://github.com/scio-labs/inkathon/releases).
+# pizza-charity
