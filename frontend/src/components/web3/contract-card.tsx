@@ -110,7 +110,7 @@ export function ContractCard() {
   return (
     <Card className="inkathon-card">
       <CardHeader className="relative">
-        <CardTitle>Pizza Ordering Contract</CardTitle>
+        <CardTitle>Pizza Request Contract</CardTitle>
 
         <Button
           variant="default"
@@ -118,7 +118,7 @@ export function ContractCard() {
           className="-top-2 absolute right-6"
           onClick={() => orderPizza()}
         >
-        Oder Pizza
+        Request Pizza
         </Button>
       </CardHeader>
 
