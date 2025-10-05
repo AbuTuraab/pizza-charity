@@ -3,6 +3,6 @@
   "framework": "nextjs",
   "buildCommand": "bun run codegen && bun run build",
   "devCommand": "bun run dev",
-  "outputDirectory": "./frontend/.next",
+  "outputDirectory": ".next",
   "installCommand": "bun install"
 }
