@@ -8,15 +8,16 @@
   },
   "engineStrict": true,
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build --turbo",
-    "build:standalone": "NEXT_OUTPUT=standalone next build --turbo",
-    "start": "next start",
-    "clean": "rm -rf .next tsconfig.tsbuildinfo",
-    "lint": "biome check . && prettier . --check",
-    "lint:fix": "biome check . --write && prettier . --write",
-    "typecheck": "tsc --pretty --noEmit"
-  },
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "lint": "eslint .",
+        "preview": "vite preview",
+        "artifacts": "cp ../contracts/target/ink/pizza_limited/pizza_limited.json ../frontend/src/assets/pizza_limited.json",
+        "format": "npx prettier . --write",
+        "codegen:pizza": "npx papi ink add ../contracts/target/ink/token/pizza_limited.contract",
+        "codegen": "npm run codegen:pizza",
+        "postinstall": "npx papi add passetHub -w wss://testnet-passet-hub.polkadot.io"
+    },
   "dependencies": {
     "@polkadot-api/descriptors": "file:../contracts/.papi/descriptors",
     "@polkadot-api/sdk-ink": "^0.4.1",
