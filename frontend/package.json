@@ -12,7 +12,7 @@
     "build": "next build --turbo",
     "build:standalone": "NEXT_OUTPUT=standalone next build --turbo",
     "start": "next start",
-    "codegen": "npx papi ink add ../contracts/target/ink/pizza_limited/pizza_limited.contract",
+    "codegen": "bun run -F contracts codegen",
     "clean": "rm -rf .next tsconfig.tsbuildinfo",
     "lint": "biome check . && prettier . --check",
     "lint:fix": "biome check . --write && prettier . --write",
