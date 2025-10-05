@@ -1,0 +1,8 @@
+{
+  "version": 0,
+  "descriptorPath": ".papi/descriptors",
+  "entries": {},
+  "ink": {
+    "pizza_limited": ".papi/contracts/pizza_limited.json"
+  }
+}
