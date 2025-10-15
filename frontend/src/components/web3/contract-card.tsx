@@ -8,14 +8,22 @@ import { CardSkeleton } from "../layout/skeletons"
 import { Button } from "../ui/button-extended"
 import { Card, CardHeader, CardTitle } from "../ui/card"
 import { Table, TableBody, TableCell, TableRow } from "../ui/table"
-import { ALICE } from "@/lib/inkathon/constants"
+import { MYADDRESS } from "@/lib/inkathon/constants"
+
+
+
 
 export function ContractCard() {
   const [queryIsLoading, setQueryIsLoading] = useState(true)
 
-  const api = useTypedApi()
-  const chain = useChainId()
-  const { signer, signerAddress } = useSignerAndAddress()
+ 
+const api = useTypedApi()
+
+const chain = useChainId()
+// Create SDK & contract instance
+      const sdk = createReviveSdk(api as ReviveSdkTypedApi, pizza.contract)
+      const contract = sdk.getContract(pizza.evmAddresses[chain])
+      const { signer, signerAddress } = useSignerAndAddress()
 
   /**
    * Contract Read (Query)
@@ -30,29 +38,25 @@ export function ContractCard() {
     try {
       if (!api || !chain) return
 
-      // Create SDK & contract instance
-      const sdk = createReviveSdk(api as ReviveSdkTypedApi, pizza.contract)
-      const contract = sdk.getContract(pizza.evmAddresses[chain])
-
-      // Option 1: Query storage directly
       const storageResult = await contract.getStorage().getRoot()
 
        const result = await contract.query("get_daily_supply", {
-          origin: ALICE
+          origin: MYADDRESS
         }); 
       const newDailySupplyState = result.success ? result.value.response : undefined
       setDailySupply(newDailySupplyState)
       console.log(dailySupply);
 
        const result1 = await contract.query("get_remaining_supply", {
-          origin: ALICE
+          origin: MYADDRESS
         }); 
       const newRemainingSupplyState = result1.success ? result1.value.response : undefined
       setRemainingSupply(newRemainingSupplyState)
 
        
-      const newMaxOrderPerUserState = storageResult.success ? storageResult.value.max_order_per_user-1 : undefined
+      const newMaxOrderPerUserState = storageResult.success ? storageResult.value.max_order_per_user : undefined
       setMaxOrderPerUser(newMaxOrderPerUserState )
+
       
     } catch (error) {
       console.error(error)
@@ -71,9 +75,6 @@ export function ContractCard() {
   const orderPizza = useCallback(async () => {
     if (!api || !chain || !signer) return
 
-    const sdk = createReviveSdk(api as ReviveSdkTypedApi, pizza.contract, )
-    const contract = sdk.getContract(pizza.evmAddresses[chain])
-
     // Map account if not mapped
     const isMapped = await sdk.addressIsMapped(signerAddress)
     if (!isMapped) {
@@ -83,7 +84,7 @@ export function ContractCard() {
 
     // Send transaction
     const tx = contract
-      .send("order_pizza_and_pay",
+      .send("order_pizza",
         {
           data: {
             quantity_ordered: quantityOrdered

@@ -1,5 +1,5 @@
 [package]
-name = "pizza_charity_limited"
+name = "pizza_limited"
 version = "0.1.0"
 authors = ["[Adeniji Aliyu] <[aliyulekn@gmail.com]>"]
 edition = "2021"

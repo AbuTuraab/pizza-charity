@@ -1,6 +1,6 @@
 {
   "source": {
-    "hash": "0xf733ff7f64055baba5b774a0419d4c373004b08cc0a2a2a905f34c48cd6ec8e3",
+    "hash": "0x0374e2594617665462143e87ceacd42a35b28f2b30b3e86128a217f1d18a169d",
     "language": "ink! 6.0.0-alpha.4",
     "compiler": "rustc 1.89.0",
     "build_info": {
@@ -13,7 +13,7 @@
     "name": "pizza_limited",
     "version": "0.1.0",
     "authors": [
-      "[your_name] <[your_email]>"
+      "[Adeniji Aliyu] <[aliyulekn@gmail.com]>"
     ]
   },
   "image": null,
@@ -51,13 +51,13 @@
         "displayName": [
           "AccountId"
         ],
-        "type": 20
+        "type": 19
       },
       "balance": {
         "displayName": [
           "Balance"
         ],
-        "type": 19
+        "type": 21
       },
       "blockNumber": {
         "displayName": [
@@ -110,47 +110,6 @@
         "label": "PizzaOrdered",
         "module_path": "pizza_limited::pizza_limited",
         "signature_topic": "0x8671b553970b7fa6710341d7ad3817acb31fc1b4830872d40875408331c22459"
-      },
-      {
-        "args": [
-          {
-            "docs": [],
-            "indexed": true,
-            "label": "from",
-            "type": {
-              "displayName": [
-                "Option"
-              ],
-              "type": 18
-            }
-          },
-          {
-            "docs": [],
-            "indexed": true,
-            "label": "to",
-            "type": {
-              "displayName": [
-                "Option"
-              ],
-              "type": 18
-            }
-          },
-          {
-            "docs": [],
-            "indexed": false,
-            "label": "value",
-            "type": {
-              "displayName": [
-                "Balance"
-              ],
-              "type": 19
-            }
-          }
-        ],
-        "docs": [],
-        "label": "Transferred",
-        "module_path": "pizza_limited::pizza_limited",
-        "signature_topic": "0x3e676d8cf728b0dbc8606529cbd67cd655f9821c579d89662a3a31270fdfe0f0"
       }
     ],
     "lang_error": {
@@ -223,9 +182,9 @@
         ],
         "default": false,
         "docs": [],
-        "label": "order_pizza_and_pay",
+        "label": "order_pizza",
         "mutates": true,
-        "payable": true,
+        "payable": false,
         "returnType": {
           "displayName": [
             "ink",
@@ -233,7 +192,7 @@
           ],
           "type": 15
         },
-        "selector": "0x4e4b2e79"
+        "selector": "0x3d77f570"
       },
       {
         "args": [],
@@ -764,10 +723,6 @@
               {
                 "index": 2,
                 "name": "CannotOrderZeroPizzas"
-              },
-              {
-                "index": 3,
-                "name": "PriceEnteredIsNotCorrect"
               }
             ]
           }
@@ -816,18 +771,10 @@
       "id": 19,
       "type": {
         "def": {
-          "primitive": "u128"
-        }
-      }
-    },
-    {
-      "id": 20,
-      "type": {
-        "def": {
           "composite": {
             "fields": [
               {
-                "type": 21,
+                "type": 20,
                 "typeName": "[u8; 32]"
               }
             ]
@@ -841,7 +788,7 @@
       }
     },
     {
-      "id": 21,
+      "id": 20,
       "type": {
         "def": {
           "array": {
@@ -852,13 +799,21 @@
       }
     },
     {
+      "id": 21,
+      "type": {
+        "def": {
+          "primitive": "u128"
+        }
+      }
+    },
+    {
       "id": 22,
       "type": {
         "def": {
           "composite": {
             "fields": [
               {
-                "type": 21,
+                "type": 20,
                 "typeName": "[u8; 32]"
               }
             ]

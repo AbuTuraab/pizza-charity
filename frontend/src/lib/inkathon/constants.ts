@@ -1,4 +1,4 @@
-export const ALICE = "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
+export const MYADDRESS="5HGthv5R15bzrDBCPb1uxuKKbh8fkmKiLq4qC696Asckhrwn"
 
 export const FAUCET_URLS: { [key: string]: string } = {
   pop: "https://learn.onpop.io/contracts/guides/bridge-tokens-to-pop-network",

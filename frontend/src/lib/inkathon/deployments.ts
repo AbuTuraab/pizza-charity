@@ -1,7 +1,4 @@
 import { contracts } from "@polkadot-api/descriptors"
-import * as flipperPassethub from "contracts/deployments/flipper/passethub"
-import * as flipperPop from "contracts/deployments/flipper/pop"
-
 import * as pizzaPassethub from "contracts/deployments/pizza_limited/passethub"
 
 

@@ -3,13 +3,13 @@
 import { useChainId, useSpendableBalance } from "@reactive-dot/react"
 import { FuelIcon } from "lucide-react"
 import { useSignerAndAddress } from "@/hooks/use-signer-and-address"
-import { ALICE, FAUCET_URLS } from "@/lib/inkathon/constants"
+import { MYADDRESS, FAUCET_URLS } from "@/lib/inkathon/constants"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 
 export function AccountBalance() {
   const chainId = useChainId()
   const { signerAddress } = useSignerAndAddress()
-  const spendableBalance = useSpendableBalance(signerAddress || ALICE)
+  const spendableBalance = useSpendableBalance(signerAddress || MYADDRESS)
 
   if (!signerAddress) return null
 
